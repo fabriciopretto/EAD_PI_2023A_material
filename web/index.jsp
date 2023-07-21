@@ -15,7 +15,8 @@
     <body>
         <h1>Hello World!</h1>
 
-        <form action="pagina2.jsp" method="post">
+        <!--<form action="pagina2.jsp" method="post">-->
+        <form action="/acao" method="post">
             <label for="fname">First name:</label><br>
             <input type="text" id="fname" name="fname"><br>
             
