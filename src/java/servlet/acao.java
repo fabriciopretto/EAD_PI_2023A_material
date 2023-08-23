@@ -5,9 +5,12 @@
  */
 package servlet;
 
+import dao.CategoriaDAO;
 import dao.UsuarioDAO;
+import entidade.Categoria;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -61,6 +64,39 @@ public class acao extends HttpServlet {
 
         System.out.println("Estou no GET.");
 
+        String parametro1 = request.getParameter("param1");
+        String pagina = request.getParameter("pagina");
+        String prod = request.getParameter("produto");
+
+        System.out.println("Param 1: " + parametro1);
+        System.out.println("Página: " + pagina);
+        System.out.println("Produto: " + prod);
+
+        // -------------------------------------------------------------------
+        String a = request.getParameter("a");
+
+        if (a.equals("editarCateg")) {
+            String id = request.getParameter("id");
+            int codigo = Integer.parseInt(id);
+
+            Categoria categoria = new CategoriaDAO().consultar(codigo);
+
+            request.setAttribute("categoria", categoria);
+
+            encaminharPagina("categoria.jsp", request, response);
+        }
+
+        if (a.equals("excluirCateg")) {
+            String id = request.getParameter("id");
+            int codigo = Integer.parseInt(id);
+
+            if (new CategoriaDAO().excluir(codigo)) {
+                encaminharPagina("categoria.jsp", request, response);
+            } else {
+                encaminharPagina("erro.jsp", request, response);
+            }
+        }
+
     }
 
     /**
@@ -85,9 +121,39 @@ public class acao extends HttpServlet {
         System.out.println("Segundo nome: " + segundoNome);
 
         if (new UsuarioDAO().autenticar(primeiroNome, segundoNome)) {
-            response.sendRedirect("sucesso.jsp");
+//            response.sendRedirect("sucesso.jsp");
+            request.setAttribute("xxx", 1); // exemplo
+            encaminharPagina("sucesso.jsp", request, response);
         } else {
-            response.sendRedirect("erro.jsp");
+            encaminharPagina("erro.jsp", request, response);
+        }
+
+        //---------------------------------------------------------------------
+        String a = request.getParameter("a");
+
+        if (a.equals("salvarCateg")) {
+            String codigo = request.getParameter("codigo");
+            String descricao = request.getParameter("descricao");
+
+            Categoria categoria = new Categoria();
+            int id = Integer.parseInt(codigo);
+            categoria.setCodigo(id);
+            categoria.setDescricao(descricao);
+
+            if (id == 0) {
+                if (new CategoriaDAO().salvar(categoria)) {
+                    encaminharPagina("sucesso.jsp", request, response);
+                } else {
+                    encaminharPagina("erro.jsp", request, response);
+                }
+            } else {
+                if (new CategoriaDAO().atualizar(categoria)) {
+                    encaminharPagina("sucesso.jsp", request, response);
+                } else {
+                    encaminharPagina("erro.jsp", request, response);
+                }
+            }
+
         }
 
     }
@@ -101,5 +167,14 @@ public class acao extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void encaminharPagina(String pagina, HttpServletRequest request, HttpServletResponse response) {
+        try {
+            RequestDispatcher rd = request.getRequestDispatcher(pagina);
+            rd.forward(request, response);
+        } catch (Exception e) {
+            System.out.println("Erro ao encaminhar: " + e);
+        }
+    }
 
 }

@@ -11,6 +11,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
+
+    <%@include file="menu.jsp" %>
+
     <body>
         <h1>Erro</h1>
     </body>

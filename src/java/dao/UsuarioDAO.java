@@ -15,7 +15,7 @@ public class UsuarioDAO {
     public boolean autenticar (String usuario, String senha) {
         // TODO
         
-        return false;
+        return true;
     }
     
 }
