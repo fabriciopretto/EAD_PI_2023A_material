@@ -15,8 +15,6 @@
         <title>JSP Page</title>
     </head>
 
-    <%@include file="menu.jsp" %>
-
     <%
         Categoria c = (Categoria) request.getAttribute("categoria");
 
@@ -26,14 +24,17 @@
     %>
 
     <body>
+
+        <%@include file="menu.jsp" %>
+        
         <h1>Cadastro de categoria</h1>
 
         <form method="post" action="acao?a=salvarCateg">
             <label for="codigo">Código</label><br>
-            <input type="text" id="codigo" name="codigo" readonly="" value="<%= c.getCodigo() %>"><br>
+            <input type="text" id="codigo" name="codigo" readonly="" value="<%= c.getCodigo()%>"><br>
 
             <label for="descricao">Descrição</label><br>
-            <input type="text" id="descricao" name="descricao" value="<%= c.getDescricao() %>">
+            <input type="text" id="descricao" name="descricao" value="<%= c.getDescricao()%>">
 
             <br> <br>
             <input type="submit" name="salvar" value="Salvar">

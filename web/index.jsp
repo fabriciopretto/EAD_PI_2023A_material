@@ -11,8 +11,11 @@
 
     </head>
 
-    <%@include file="menu.jsp" %>
-    
+    <%--<%@include file="menu.jsp" %>--%>
+
+    <%
+        response.sendRedirect("login.jsp");
+    %>
     <body>            
 
     </body>

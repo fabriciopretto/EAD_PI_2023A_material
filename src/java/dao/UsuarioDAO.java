@@ -5,6 +5,8 @@
  */
 package dao;
 
+import entidade.Usuario;
+
 /**
  *
  * @author pretto
@@ -12,10 +14,12 @@ package dao;
 public class UsuarioDAO {
     
     
-    public boolean autenticar (String usuario, String senha) {
+    public Usuario autenticar (String usuario, String senha) {
         // TODO
         
-        return true;
+        Usuario u = new Usuario();
+        
+        return u;
     }
     
 }

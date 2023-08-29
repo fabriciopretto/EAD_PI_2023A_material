@@ -8,6 +8,7 @@ package servlet;
 import dao.CategoriaDAO;
 import dao.UsuarioDAO;
 import entidade.Categoria;
+import entidade.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -15,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -120,13 +122,14 @@ public class acao extends HttpServlet {
         System.out.println("Primeiro nome: " + primeiroNome);
         System.out.println("Segundo nome: " + segundoNome);
 
-        if (new UsuarioDAO().autenticar(primeiroNome, segundoNome)) {
+        if (new UsuarioDAO().autenticar(primeiroNome, segundoNome) != null) {
 //            response.sendRedirect("sucesso.jsp");
             request.setAttribute("xxx", 1); // exemplo
-            encaminharPagina("sucesso.jsp", request, response);
+            //   encaminharPagina("sucesso.jsp", request, response);
         } else {
-            encaminharPagina("erro.jsp", request, response);
+            //  encaminharPagina("erro.jsp", request, response);
         }
+        // encaminhamentos comentados na U7 apos implementacao do LOGIN
 
         //---------------------------------------------------------------------
         String a = request.getParameter("a");
@@ -153,7 +156,38 @@ public class acao extends HttpServlet {
                     encaminharPagina("erro.jsp", request, response);
                 }
             }
+        }
 
+        if (a.equals("login")) {
+            // logica do login
+            // pegar usuario
+            // pegar senha
+            // autenticar = verificar
+            // sucesso = vai pro sistema || erro = login de novo
+
+            String user = request.getParameter("user");
+            String passwd = request.getParameter("passwd");
+
+            System.out.println("User: " + user);
+            System.out.println("Passwd: " + passwd);
+
+            Usuario usuario = new UsuarioDAO().autenticar(user, passwd);
+
+            if (usuario != null) {
+                HttpSession sessao = request.getSession();
+                sessao.setAttribute("user", usuario);
+
+                encaminharPagina("menu.jsp", request, response);
+            } else {
+                encaminharPagina("erro.jsp", request, response);
+            }
+        }
+
+        if (a.equals("logout")) {
+            HttpSession sessao = request.getSession();
+            sessao.invalidate();
+
+            response.sendRedirect("login.jsp");
         }
 
     }

@@ -1,28 +1,19 @@
 <%-- 
-    Document   : menu
-    Created on : Aug 23, 2023, 11:05:31 AM
+    Document   : login
+    Created on : Aug 29, 2023, 10:57:18 AM
     Author     : pretto
 --%>
 
-<%@page import="entidade.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <%
-            HttpSession sessao = request.getSession();
-            Usuario usuario = (Usuario) sessao.getAttribute("user");
-
-            if (usuario == null) {
-                response.sendRedirect("login.jsp");
-            }
-        %>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Menu</title>
+        <title>JSP Page</title>
+
 
         <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/sticky-footer-navbar.css" rel="stylesheet">
+        <link href="css/sign-in.css" rel="stylesheet">
 
         <style>
             .bd-placeholder-img {
@@ -97,29 +88,10 @@
                 z-index: 1500;
             }
         </style>
-
-        <style>
-            /*            ul {
-                            list-style-type: none;
-                            margin: 0;
-                            padding: 0;
-                        }
-            
-                        li {
-                            display: inline;
-                        }*/
-        </style>
-
     </head>
     <body>
 
-        <!--        <ul>
-                    <li><a href="index.jsp">Home</a></li>
-                    <li><a href="categoria.jsp">Cadastro categoria</a></li>
-                    <li><a href="xxx.jsp">XXX</a></li>
-                    <li><a href="yyy.jsp">YYY</a></li>
-                </ul>-->
-
+    <body class="text-center">
         <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <symbol id="check2" viewBox="0 0 16 16">
         <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
@@ -171,43 +143,31 @@
         </ul>
     </div>
 
+    <!-- Form de submissao -->
+    <main class="form-signin w-100 m-auto">
+        <form action="acao?a=login" method="post">
+            <img class="mb-4" src="https://cdn-icons-png.flaticon.com/512/5087/5087607.png" alt="" width="72" height="57">
+            <h1 class="h3 mb-3 fw-normal">Seja Bem-Vindo</h1>
 
-    <header>
-        <!-- Fixed navbar -->
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="menu.jsp">Home</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="categoria.jsp">Categorias</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled">Disabled</a>
-                        </li>
-                    </ul>
-                    <form class="d-flex" role="search" action="acao?a=logout" method="post">                       
-                        <button class="btn btn-outline-success" type="submit">Sair</button>
-                    </form>
-                </div>
+            <div class="form-floating">
+                <input type="email" class="form-control" id="floatingInput" name="user" placeholder="name@example.com">
+                <label for="floatingInput">Email address</label>
             </div>
-        </nav>
-    </header>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" name="passwd" placeholder="Password">
+                <label for="floatingPassword">Password</label>
+            </div>
 
-    <!-- Begin page content -->
-    <main class="flex-shrink-0">
-        <div class="container">
-
-        </div>
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                </label>
+            </div>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Acessar</button>
+            <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2023</p>
+        </form>
     </main>
+    <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
-    <footer class="footer mt-auto py-3 bg-body-tertiary">
-        <div class="container">
-
-        </div>
-    </footer>
 </body>
 </html>
