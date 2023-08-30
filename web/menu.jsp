@@ -201,6 +201,9 @@
                             <a class="nav-link active" aria-current="page" href="ajaxJQuery.jsp">AJAX JQuery</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="consultaCategoria.jsp">Consulta Categoria</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link disabled">Disabled</a>
                         </li>
                     </ul>
