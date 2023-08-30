@@ -186,6 +186,21 @@
                             <a class="nav-link active" aria-current="page" href="categoria.jsp">Categorias</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" target="_blank" href="relCategoria.jsp">Rel Categorias</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" target="_blank" href="grafico1.jsp">Gráfico 1</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" target="_blank" href="grafico2.jsp">Gráfico 2</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="ajaxManual.jsp">AJAX Manual</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="ajaxJQuery.jsp">AJAX JQuery</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link disabled">Disabled</a>
                         </li>
                     </ul>

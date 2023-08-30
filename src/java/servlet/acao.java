@@ -63,6 +63,7 @@ public class acao extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        processRequest(request, response);
+        PrintWriter out = response.getWriter();
 
         System.out.println("Estou no GET.");
 
@@ -96,6 +97,17 @@ public class acao extends HttpServlet {
                 encaminharPagina("categoria.jsp", request, response);
             } else {
                 encaminharPagina("erro.jsp", request, response);
+            }
+        }
+        if (a.equals("consultaCateg")) {
+            int id = Integer.parseInt(request.getParameter("id"));
+
+            Categoria c = new CategoriaDAO().consultar(id);
+
+            if (c != null) {
+                out.println(c.getDescricao());
+            } else {
+                out.println("código inválido");
             }
         }
 

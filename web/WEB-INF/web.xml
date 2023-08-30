@@ -4,9 +4,17 @@
         <servlet-name>acao</servlet-name>
         <servlet-class>servlet.acao</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletAjaxManual</servlet-name>
+        <servlet-class>servlet.ServletAjaxManual</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>acao</servlet-name>
         <url-pattern>/acao</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletAjaxManual</servlet-name>
+        <url-pattern>/ServletAjaxManual</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

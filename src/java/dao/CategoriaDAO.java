@@ -8,8 +8,14 @@ package dao;
 import apoio.ConexaoBD;
 import entidade.Categoria;
 import java.sql.Statement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.JasperRunManager;
 
 /**
  *
@@ -85,7 +91,7 @@ public class CategoriaDAO {
             ResultSet resultado = st.executeQuery(sql);
 
             resultado.next();
-            
+
             categoria.setCodigo(resultado.getInt("id"));
             categoria.setDescricao(resultado.getString("descricao"));
 
@@ -139,5 +145,22 @@ public class CategoriaDAO {
             System.out.println("Erro ao atualizar Categoria: " + e);
             return false;
         }
+    }
+
+    public byte[] gerarRelatorio() {
+        try {
+            Connection conn = ConexaoBD.getInstance().getConnection();
+
+            JasperReport relatorio = JasperCompileManager.compileReport(getClass().getResourceAsStream("/relatorios/relCategorias23a.jrxml"));
+
+            Map parameters = new HashMap();
+
+            byte[] bytes = JasperRunManager.runReportToPdf(relatorio, parameters, conn);
+
+            return bytes;
+        } catch (Exception e) {
+            System.out.println("erro ao gerar relatorio: " + e);
+        }
+        return null;
     }
 }
